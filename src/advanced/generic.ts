@@ -1,5 +1,5 @@
-const cars: string[] = ["ford", "audi"];
-const cars2: Array<string> = ["ford", "audi"];
+// const cars: string[] = ["ford", "audi"];
+// const cars2: Array<string> = ["ford", "audi"];
 
 // const promise = new Promise<string>((resolve) => {
 //   setTimeout(() => {
@@ -9,52 +9,52 @@ const cars2: Array<string> = ["ford", "audi"];
 
 // promise.then((data) => console.log(data));
 
-const promise: Promise<string> = new Promise<string>((resolve) => {
-  setTimeout(() => {
-    resolve("Promise resolved");
-  }, 2000);
-});
+// const promise: Promise<string> = new Promise<string>((resolve) => {
+//   setTimeout(() => {
+//     resolve("Promise resolved");
+//   }, 2000);
+// });
 
-promise.then((data) => console.log(data));
+// promise.then((data) => console.log(data));
 
-function mergeObj<T extends object, R extends object>(a: T, b: R) {
-  return Object.assign({}, a, b);
-}
+// function mergeObj<T extends object, R extends object>(a: T, b: R) {
+//   return Object.assign({}, a, b);
+// }
 
-const merged = mergeObj({ name: "Sheva" }, { log: "raygan" });
-const merged2 = mergeObj({ car: "mustang" }, { type: 42 });
+// const merged = mergeObj({ name: "Sheva" }, { log: "raygan" });
+// const merged2 = mergeObj({ car: "mustang" }, { type: 42 });
 // const merged3 = mergeObj("aaa" ,  "bbb" );
 
 // console.log(merged2);
 
 // =====================
-interface iLength {
-  length: number;
-}
+// interface iLength {
+//   length: number;
+// }
 
-function withCount<T extends iLength>(value: T): { value: T; count: string } {
-  return {
-    value,
-    count: `Тут ${value.length} букофф`,
-  };
-}
+// function withCount<T extends iLength>(value: T): { value: T; count: string } {
+//   return {
+//     value,
+//     count: `Тут ${value.length} букофф`,
+//   };
+// }
 
-// console.log(withCount("hello typeScript"));
-// console.log(withCount(["hello", "typeScript"]));
-// console.log(withCount({ length: 20 }));
-// console.log(withCount(20));
+// // console.log(withCount("hello typeScript"));
+// // console.log(withCount(["hello", "typeScript"]));
+// // console.log(withCount({ length: 20 }));
+// // console.log(withCount(20));
 
-// ==================================
+// // ==================================
 
-function getObjectValue<T extends object, R extends keyof T>(obj: T, key: R) {
-  return obj[key];
-}
+// function getObjectValue<T extends object, R extends keyof T>(obj: T, key: R) {
+//   return obj[key];
+// }
 
-const car = {
-  model: "tesla",
-  wheels: 6,
-  type: "diesel",
-};
+// const car = {
+//   model: "tesla",
+//   wheels: 6,
+//   type: "diesel",
+// };
 
 // console.log(getObjectValue(car, "model"));
 // console.log(getObjectValue(car, "wheels"));
@@ -62,22 +62,22 @@ const car = {
 
 // ====================================
 
-class Collection<T extends number | string | boolean> {
-  //   private _items: T[] = [];
-  constructor(private _items: T[] = []) {}
+// class Collection<T extends number | string | boolean> {
+//   //   private _items: T[] = [];
+//   constructor(private _items: T[] = []) {}
 
-  add(item: T) {
-    this._items.push(item);
-  }
+//   add(item: T) {
+//     this._items.push(item);
+//   }
 
-  remove(item: T) {
-    this._items = this._items.filter((elem) => elem !== item);
-  }
+//   remove(item: T) {
+//     this._items = this._items.filter((elem) => elem !== item);
+//   }
 
-  get items(): T[] {
-    return this._items;
-  }
-}
+//   get items(): T[] {
+//     return this._items;
+//   }
+// }
 
 // const strings = new Collection(["i", "am", "strings"]);
 // strings.add("!");
@@ -93,3 +93,32 @@ class Collection<T extends number | string | boolean> {
 // objs.add({ c: "11" });
 // objs.remove({ b: "5" });
 // console.log(objs.items);
+
+interface CarType {
+  type: string;
+  year: number;
+}
+
+function carValidate(type: string, year: number): CarType {
+  const car: Partial<CarType> = {};
+  if (type.length > 3) {
+    car.type = type;
+  }
+
+  if (year > 2000) {
+    car.year = year;
+  }
+
+  return car as CarType;
+}
+
+// ==============================
+
+const cars: Readonly<Array<string>> = ["Audi", "BMW"];
+// cars.pop()
+
+const mcLaren: Readonly<CarType> = {
+  type: "mcLaren",
+  year: 2020,
+};
+// mcLaren.type = "Audi";
