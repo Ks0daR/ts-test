@@ -122,3 +122,4 @@ const mcLaren: Readonly<CarType> = {
   year: 2020,
 };
 // mcLaren.type = "Audi";
+
